@@ -15,8 +15,9 @@ dotenv.config();
 
 // database connection
 const mongoose = require("mongoose");
-const connectDB = require("./DataBase/ConnectDB");
-connectDB();
+require("./DataBase/ConnectDB");
+// const connectDB = require("./DataBase/ConnectDB");
+// connectDB();
 // Import task routes
 const Task = require("./Models/Task");
 

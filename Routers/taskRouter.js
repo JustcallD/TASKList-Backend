@@ -12,7 +12,7 @@ const {
 const express = require("express");
 const taskRouter = express.Router();
 
-taskRouter.get("/", verifyTokenAndAuthorization, getTask);
+taskRouter.get("/", getTask);
 taskRouter.post("/", verifyTokenAndAuthorization, postTask);
 
 module.exports = taskRouter;

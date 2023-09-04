@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 
+const TaskStatus = {
+  OPEN: "open",
+  IN_PROGRESS: "in-progress",
+  COMPLETE: "completed",
+};
+
 const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  description: { type: String, required: true },
-  status: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now },
+  description: { type: String },
+  // project: { type: mongoose.Types.ObjectId, ref: "Project" },
+  assignedTo: { type: mongoose.Types.ObjectId, ref: "users", required: true },
+  status: {
+    type: String,
+    enum: TaskStatus,
+    default: TaskStatus.OPEN,
+  },
 });
 
-const Task = mongoose.model("Task", taskSchema);
-
-module.exports = Task;
+module.exports = mongoose.model("Tasks", taskSchema);

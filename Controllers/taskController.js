@@ -22,7 +22,7 @@ const postTask = async (req, res) => {
     assignedTo: userID,
   });
   try {
-    await newTask.save();
+    (await newTask.save()).populate("assignedTo");
     res.status(201).send(newTask);
   } catch (error) {
     console.log(error);

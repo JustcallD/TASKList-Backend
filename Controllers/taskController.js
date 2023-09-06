@@ -4,7 +4,8 @@ const Tasks = require("../Models/Task");
 
 const getTask = async (req, res) => {
   try {
-    const tasks = await Tasks.find({});
+    const tasks = await Tasks.find({})
+    .populate("assignedTo", "username role");
     res.status(200).json(tasks);
   } catch (error) {
     console.log(error);
@@ -22,7 +23,7 @@ const postTask = async (req, res) => {
     assignedTo: userID,
   });
   try {
-    (await newTask.save()).populate("assignedTo");
+    await newTask.save();
     res.status(201).send(newTask);
   } catch (error) {
     console.log(error);
